@@ -9,12 +9,19 @@ export default class ScoreKeeper extends Component {
         }
     }
 
+    increaseScore(e) {
+        this.setState({
+            score1: this.state.score1 + 1
+        })
+    }
+
     render() {
         return (
             <div>
                 <div>
                     <h3>Score Player 1:</h3>
                     <p>{this.state.score1}</p>
+                    <button onClick={(e) => this.increaseScore(e)}>Add Point</button>
                 </div>
                 <div>
                     <h3>Score Player 2:</h3>
