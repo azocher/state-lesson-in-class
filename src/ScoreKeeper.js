@@ -1,32 +1,30 @@
 import React, { Component } from 'react'
+import Point from './Point'
+
+let players = ['Player 1', 'Player 2', 'Player 3']
 
 export default class ScoreKeeper extends Component {
     constructor(props) {
         super()
         this.state = {
+            score0: 0,
             score1: 0,
             score2: 0
         }
     }
 
-    increaseScore(e) {
-        this.setState({
-            score1: this.state.score1 + 1
-        })
+    increaseScore(e, scoreKey) {
+        console.log(this.state[`${scoreKey}`])
+        let scoreObj = { [scoreKey]: this.state[scoreKey] + 1}
+        this.setState(scoreObj)
     }
 
     render() {
         return (
             <div>
-                <div>
-                    <h3>Score Player 1:</h3>
-                    <p>{this.state.score1}</p>
-                    <button onClick={(e) => this.increaseScore(e)}>Add Point</button>
-                </div>
-                <div>
-                    <h3>Score Player 2:</h3>
-                    <p>{this.state.score2}</p>
-                </div>
+               {players.map((player, i) => {
+                   return <Point player={player} score={this.state[`score${i}`]} increaseScore={this.increaseScore} scoreKey={`score${i}`} />
+               })}
             </div>
         )
     }
